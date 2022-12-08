@@ -1,0 +1,133 @@
+###
+POST http://localhost:4000/users/login
+Content-Type: application/json
+
+{
+    "email": "resarisyan77@gmail.com",
+    "password": "123456"
+}
+
+###
+POST http://localhost:4000/users/register
+Content-Type: application/json
+
+{
+    "email":"resarisyan77@gmail.com",
+    "full_name":"Resa Auliana Risyan",
+    "username":"resarisyan",
+    "password": "123456",
+    "profile_image_url": "https://github.com/resarisyan",
+    "age" : "20",
+    "phone_number" : "087749355656"
+}
+
+###
+PUT http://localhost:4000/users/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "email":"resarisyan77@gmail.com",
+    "full_name":"Resa Auliana Risyan Update",
+    "username":"resarisyan",
+    "password": "123456",
+    "profile_image_url": "https://github.com/resarisyan",
+    "age" : "20",
+    "phone_number" : "087749355656"
+}
+
+###
+DELETE  http://localhost:4000/users/7
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+GET http://localhost:4000/photos
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+POST http://localhost:4000/photos
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "poster_image_url": "https://image.com",
+    "title": "Image2 Title",
+    "caption": "Image2 Caption"
+}
+
+###
+PUT http://localhost:4000/photos/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "poster_image_url": "https://image.com",
+    "title": "Image1 Title Update",
+    "caption": "Image1 Caption Update"
+}
+
+###
+DELETE  http://localhost:4000/photos/3
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+GET http://localhost:4000/comments
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+POST http://localhost:4000/comments
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "comment": "Comment Photo",
+    "PhotoId": 1
+}
+
+###
+PUT http://localhost:4000/comments/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "comment": "Comment Photo Update"
+}
+
+###
+DELETE  http://localhost:4000/comments/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+GET http://localhost:4000/socialmedias
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+###
+POST http://localhost:4000/socialmedias
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "name": "Social Media 1",
+    "social_media_url": "https://facebook.com"
+}
+
+###
+PUT http://localhost:4000/socialmedias/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
+
+{
+    "name": "Social Media Update",
+    "social_media_url": "https://facebook.com"
+}
+
+###
+DELETE  http://localhost:4000/socialmedias/1
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJyZXNhcmlzeWFuNzdAZ21haWwuY29tIiwiaWF0IjoxNjY2NDc0NDUwfQ.GwlOfeBl0o-BWqY2tF4IcMUXOReZb-D1YKHnOcC3-Wc
