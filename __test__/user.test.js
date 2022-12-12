@@ -1,5 +1,7 @@
 const app = require('../app');
 const request = require('supertest');
+const { generateToken } = require('../helpers/jwt');
+const { hashPassword } = require('../helpers/bcrypt.js');
 const { sequelize } = require('../models');
 
 const UserData = {
@@ -14,9 +16,9 @@ const UserData = {
 
 const UserUpdate = {
   full_name: 'User Update',
-  email: 'user@gmail.com',
-  username: 'user',
-  password: '123456789',
+  email: 'usertest@gmail.com',
+  username: 'usertest',
+  password: '123456',
   profile_image_url: 'https://picsum.photos/id/1/200/200',
   age: 19,
   phone_number: 12345,
@@ -33,8 +35,8 @@ const WrongUser = {
 };
 
 const UserLogin = {
-  email: 'user@gmail.com',
-  password: '123456789',
+  email: 'usertest@gmail.com',
+  password: '123456',
 };
 
 const WrongUserLogin = {
@@ -53,7 +55,6 @@ describe('POST /users/register', () => {
       .send(UserData)
       .end((err, res) => {
         if (err) done(err);
-        id = res.body.user.id;
         expect(res.status).toEqual(201);
         expect(typeof res.body).toEqual('object');
         expect(res.body.user).toHaveProperty('id');
@@ -97,7 +98,6 @@ describe('POST /users/login', () => {
       .send(UserLogin)
       .end((err, res) => {
         if (err) done(err);
-        token = res.body.token;
         expect(res.status).toEqual(200);
         expect(typeof res.body).toEqual('object');
         expect(res.body).toHaveProperty('token');
@@ -206,6 +206,38 @@ describe('DELETE /users/:userId', () => {
         done();
       });
   });
+});
+
+beforeAll((done) => {
+  sequelize.queryInterface
+    .bulkInsert(
+      'Users',
+      [
+        {
+          email: 'usertest@gmail.com',
+          full_name: 'User Test',
+          username: 'usertest',
+          password: hashPassword('123456'),
+          profile_image_url: 'https://photo.com',
+          age: 20,
+          phone_number: 12345,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      { returning: true }
+    )
+    .then((result) => {
+      token = generateToken({
+        id: result[0].id,
+        email: result[0].email,
+      });
+      id = result[0].id;
+      return done();
+    })
+    .catch((err) => {
+      done(err);
+    });
 });
 
 afterAll((done) => {

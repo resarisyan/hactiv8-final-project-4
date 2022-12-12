@@ -11,8 +11,8 @@ const PhotoData = {
 };
 
 const PhotoDataUpdate = {
-  title: 'Photo1 Update',
-  caption: 'Profile Picture Update',
+  title: 'Photo Test Update',
+  caption: 'Profile Test Picture Update',
   poster_image_url: 'https://picsum.photos/id/1/200/200',
 };
 
@@ -22,6 +22,7 @@ const WrongPhoto = {
   poster_image_url: '',
 };
 
+let userId;
 let token;
 let id;
 
@@ -34,7 +35,6 @@ describe('POST /photos', () => {
       .send(PhotoData)
       .end((err, res) => {
         if (err) done(err);
-        id = res.body.id;
         expect(res.status).toEqual(201);
         expect(typeof res.body).toEqual('object');
         expect(typeof res.body.id).toEqual('number');
@@ -225,11 +225,33 @@ beforeAll((done) => {
       { returning: true }
     )
     .then((result) => {
+      userId = result[0].id;
       token = generateToken({
         id: result[0].id,
         email: result[0].email,
       });
-      return done();
+      sequelize.queryInterface
+        .bulkInsert(
+          'Photos',
+          [
+            {
+              title: 'Photo Test',
+              caption: 'Profile Test Picture',
+              poster_image_url: 'https://picsum.photos/id/1/200/200',
+              UserId: userId,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            },
+          ],
+          { returning: true }
+        )
+        .then((result) => {
+          id = result[0].id;
+          return done();
+        })
+        .catch((err) => {
+          done(err);
+        });
     })
     .catch((err) => {
       done(err);

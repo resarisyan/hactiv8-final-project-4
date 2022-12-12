@@ -24,6 +24,7 @@ const WrongSocialMedia = {
 
 let token;
 let id;
+let userId;
 
 // Create SocialMedia
 describe('POST /socialmedias', () => {
@@ -35,7 +36,6 @@ describe('POST /socialmedias', () => {
       .end((err, res) => {
         if (err) done(err);
         expect(res.status).toEqual(201);
-        id = res.body.social_media.id;
         expect(typeof res.body).toEqual('object');
         expect(typeof res.body.social_media.id).toEqual('number');
         expect(typeof res.body.social_media.UserId).toEqual('number');
@@ -242,9 +242,30 @@ beforeAll((done) => {
         id: result[0].id,
         email: result[0].email,
       });
-      SocialMediaData.UserId = result[0].id;
-      SocialMediaDataUpdate.UserId = result[0].id;
-      return done();
+      userId = result[0].id;
+      SocialMediaData.UserId = userId;
+      SocialMediaDataUpdate.UserId = userId;
+      sequelize.queryInterface
+        .bulkInsert(
+          'SocialMedias',
+          [
+            {
+              name: 'UserMediaTest',
+              social_media_url: 'https://instagram.com/usermedia',
+              UserId: userId,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            },
+          ],
+          { returning: true }
+        )
+        .then((result) => {
+          id = result[0].id;
+          return done();
+        })
+        .catch((err) => {
+          done(err);
+        });
     })
     .catch((err) => {
       done(err);

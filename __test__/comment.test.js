@@ -34,7 +34,6 @@ describe('POST /comments', () => {
       .end((err, res) => {
         if (err) done(err);
         expect(res.status).toEqual(201);
-        id = res.body.comment.id;
         expect(typeof res.body).toEqual('object');
         expect(typeof res.body.comment.id).toEqual('number');
         expect(typeof res.body.comment.UserId).toEqual('number');
@@ -234,10 +233,29 @@ beforeAll((done) => {
         )
         .then((result) => {
           photoId = result[0].id;
-          console.log('Photo Saya: ' + photoId);
           CommentData.PhotoId = photoId;
           CommentDataUpdate.PhotoId = photoId;
-          return done();
+          sequelize.queryInterface
+            .bulkInsert(
+              'Comments',
+              [
+                {
+                  UserId: userId,
+                  comment: 'Ini Komentar Test',
+                  PhotoId: photoId,
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                },
+              ],
+              { returning: true }
+            )
+            .then((result) => {
+              id = result[0].id;
+              return done();
+            })
+            .catch((err) => {
+              done(err);
+            });
         })
         .catch((err) => {
           done(err);
